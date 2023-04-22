@@ -72,7 +72,9 @@ export default function Home() {
 						onClick={(e)=>{
 							document.querySelectorAll(".fades-left").forEach((el)=> {el.classList.add("fade-left")});
 							document.querySelectorAll(".fades-right").forEach((el)=> {el.classList.add("fade-right")});
-							document.querySelectorAll(".card").forEach((el)=> {el.style.border = "none"});
+							
+							Array.from(document.querySelectorAll('.card') as NodeListOf<HTMLElement>).forEach((el)=> {el.style.border = "none"})
+
 							setTimeout(()=>{
 								router.push("/projects");
 							}, 900)

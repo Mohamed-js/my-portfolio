@@ -81,7 +81,7 @@ export default function Example() {
 					{socials.map((s) => (
 						<ProjectCard>
 							<div className="relative duration-700 group fades-right">
-								<h2 className="py-4 text-center text-white text-xl flex justify-between px-2 sm:px-4"> 
+								<h2 className="py-4 text-center text-white text-xl flex justify-between px-2 sm:px-4 items-center"> 
 									{s.github ? <span><Link className="github-link" href={s.github} target="_blank"><Github size={18} /></Link></span>: <span style={{
 										width: 35
 									}}></span>}
