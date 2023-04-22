@@ -1,142 +1,123 @@
+"use client";
+import { Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import React from "react";
-import { allProjects } from "contentlayer/generated";
 import { Navigation } from "../components/nav";
-import { Card } from "../components/card";
-import { Article } from "./article";
-import { Redis } from "@upstash/redis";
-import { Eye } from "lucide-react";
+import { ProjectCard } from "../components/projectCard";
 
-const redis = Redis.fromEnv();
+const socials = [
+	{
+		image: "/sellex.png",
+		link: "https://sellex-store.onrender.com/",
+		label: "Sellex",
+		github: "https://github.com/Mohamed-js/Sell-Ex",
+		notScrolling: true,
+		credentials: {email: "support@sellex.com", password: "222333"},
+		stack: ['Ruby on Rails', "React.js", "CSS", "JavaScript"],
+		description: null
+	},
+	{
+		image: "/sellex-storefront.png",
+		link: "https://sellex-store.vercel.app/otaku",
+		label: "Sellex Storefront",
+		github: "https://github.com/Mohamed-js/sellex-store-front",
+		notScrolling: false,
+		credentials: null,
+		stack: ['Next.js', "Tailwind"],
+		description: null
+	},
+	{
+		image: "/agz5anty.png",
+		link: "https://mohamed-js.github.io/agz5anty-landing/",
+		label: "Agz5anty Landing",
+		github: "https://github.com/Mohamed-js/agz5anty-landing",
+		notScrolling: false,
+		credentials: null,
+		stack: ["React Native", 'Ruby on Rails', "React.js", "CSS", "HTML"],
+		description: null
+	},
+	{
+		image: "/andal.png",
+		link: "https://lucid-joliot-e8cdf9.netlify.app/",
+		label: "Andal Fighters",
+		github: "https://github.com/Mohamed-js/JS--GAME",
+		notScrolling: true,
+		credentials: null,
+		stack: ["JavaScript", "Phaser3"],
+		description: "A browser JavaScript game I made using the game engine Phaser3. You fight countless Andal and you level up! Can you beat my score?"
+	},
+	{
+		image: "/makeup.png",
+		link: "https://mohamed-js.github.io/makeup-online/#/",
+		label: "Makeup Catalog",
+		github: "https://mohamed-js.github.io/makeup-online/#/",
+		notScrolling: false,
+		credentials: null,
+		stack: ["React.js", 'FramerMotion', 'CSS'],
+		description: null
+	},
+	{
+		image: "/petsmating.webp",
+		link: "https://play.google.com/store/apps/details?id=com.etk.PetsMating",
+		label: "PetsMating",
+		github: null,
+		notScrolling: false,
+		credentials: null,
+		stack: ['Laravel', "Flutter", "Node.js", "React.js"],
+		description: null
+	},
+];
 
-export const revalidate = 60;
-export default async function ProjectsPage() {
-	const views = (
-		await redis.mget<number[]>(
-			...allProjects.map((p) => ["pageviews", "projects", p.slug].join(":")),
-		)
-	).reduce((acc, v, i) => {
-		acc[allProjects[i].slug] = v ?? 0;
-		return acc;
-	}, {} as Record<string, number>);
-
-	const featured = allProjects.find(
-		(project) => project.slug === "planetfall",
-	)!;
-	const top2 = allProjects.find((project) => project.slug === "envshare")!;
-	const top3 = allProjects.find((project) => project.slug === "qstash")!;
-	const sorted = allProjects
-		.filter((p) => p.published)
-		.filter(
-			(project) =>
-				project.slug !== featured.slug &&
-				project.slug !== top2.slug &&
-				project.slug !== top3.slug,
-		)
-		.sort(
-			(a, b) =>
-				new Date(b.date ?? Number.POSITIVE_INFINITY).getTime() -
-				new Date(a.date ?? Number.POSITIVE_INFINITY).getTime(),
-		);
-
+export default function Example() {
 	return (
-		<div className="relative pb-16">
+		<div className="overflow-hidden">
+			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 w-full h-full fixed"></div>
 			<Navigation />
-			<div className="px-6 pt-16 mx-auto space-y-8 max-w-7xl lg:px-8 md:space-y-16 md:pt-24 lg:pt-32">
-				<div className="max-w-2xl mx-auto lg:mx-0">
-					<h2 className="text-3xl font-bold tracking-tight text-zinc-100 sm:text-4xl">
-						Projects
-					</h2>
-					<p className="mt-4 text-zinc-400">
-						Some of the projects are from work and some are on my own time.
-					</p>
-				</div>
-				<div className="w-full h-px bg-zinc-800" />
-
-				<div className="grid grid-cols-1 gap-8 mx-auto lg:grid-cols-2 ">
-					<Card>
-						<Link href={`/projects/${featured.slug}`}>
-							<article className="relative h-full w-full p-4 md:p-8">
-								<div className="flex justify-between gap-2 items-center">
-									<div className="text-xs text-zinc-100">
-										{featured.date ? (
-											<time dateTime={new Date(featured.date).toISOString()}>
-												{Intl.DateTimeFormat(undefined, {
-													dateStyle: "medium",
-												}).format(new Date(featured.date))}
-											</time>
-										) : (
-											<span>SOON</span>
-										)}
-									</div>
-									<span className="text-zinc-500 text-xs  flex items-center gap-1">
-										<Eye className="w-4 h-4" />{" "}
-										{Intl.NumberFormat("en-US", { notation: "compact" }).format(
-											views[featured.slug] ?? 0,
-										)}
-									</span>
-								</div>
-
-								<h2
-									id="featured-post"
-									className="mt-4 text-3xl font-bold  text-zinc-100 group-hover:text-white sm:text-4xl font-display"
-								>
-									{featured.title}
+			<div className="flex flex-col min-h-screen items-center justify-center">
+			<h1 className="z-10 mt-20 mb-4 p-4 text-transparent cursor-default text-edge-outline fade-from-right font-display text-6xl md:text-9xl whitespace-nowrap bg-clip-text bg-white fades-left w-full max-w-5xl">
+				Projects
+			</h1>
+			<div className="container flex items-center justify-center px-4 mx-auto fade-from-left mb-12 mt-8 max-w-5xl">
+				<div className="grid w-full grid-cols-1 gap-8 mx-auto sm:mt-0 md:grid-cols-2 lg:gap-16">
+					{socials.map((s) => (
+						<ProjectCard>
+							<div className="relative duration-700 group fades-right">
+								<h2 className="py-4 text-center text-white text-xl flex justify-between px-2 sm:px-4"> 
+									{s.github ? <span><Link className="github-link" href={s.github} target="_blank"><Github size={18} /></Link></span>: <span style={{
+										width: 35
+									}}></span>}
+									<span>{s.label}</span>
+									<span><Link className="site-link" href={s.link} target="_blank"><ExternalLink size={18} /></Link></span>
 								</h2>
-								<p className="mt-4 leading-8 duration-150 text-zinc-400 group-hover:text-zinc-300">
-									{featured.description}
-								</p>
-								<div className="absolute bottom-4 md:bottom-8">
-									<Link
-										className="text-zinc-200 hover:text-zinc-50 hidden lg:block"
-										href={`/projects/${featured.slug}`}
-									>
-										Read more <span aria-hidden="true">&rarr;</span>
-									</Link>
+								<div className="overflow-y-scroll relative w-full" style={{
+									height: s.notScrolling ? "auto" : "24rem"
+								}}>
+									<img src={s.image} alt={s.label} className="object-cover object-top"/>
 								</div>
-							</article>
-						</Link>
-					</Card>
-
-					<div className="flex flex-col w-full gap-8  mx-auto border-t border-gray-900/10  lg:mx-0  lg:border-t-0 ">
-						{[top2, top3].map((project) => (
-							<Card key={project.slug}>
-								<Article project={project} views={views[project.slug] ?? 0} />
-							</Card>
-						))}
-					</div>
+								{s.description && <div className="p-2 sm:p-2 text-gray-200">
+									<p>{s.description}</p>
+								</div>}
+								<div className="p-2 sm:p-2">
+									{s.credentials &&
+										<div className="text-white">
+											<h3 className="text-sky-400">Test account:</h3>
+											<ul>
+												<li><small>Email: {s.credentials.email}</small></li>
+												<li><small>Password: {s.credentials.password}</small></li>
+											</ul>
+											<hr style={{margin: "10px 0"}} />
+										</div> 
+									}
+									<div className="flex p-1 flex-wrap">
+										{s.stack.map(tech =>{
+											return <span className="p-2 px-5 bg-sky-400 text-white rounded-3xl m-1">{tech}</span>
+										})}
+									</div>
+								</div>
+							</div>
+						</ProjectCard>
+					))}
 				</div>
-				<div className="hidden w-full h-px md:block bg-zinc-800" />
-
-				<div className="grid  grid-cols-1 gap-4 mx-auto lg:mx-0 md:grid-cols-3">
-					<div className="grid grid-cols-1 gap-4">
-						{sorted
-							.filter((_, i) => i % 3 === 0)
-							.map((project) => (
-								<Card key={project.slug}>
-									<Article project={project} views={views[project.slug] ?? 0} />
-								</Card>
-							))}
-					</div>
-					<div className="grid grid-cols-1 gap-4">
-						{sorted
-							.filter((_, i) => i % 3 === 1)
-							.map((project) => (
-								<Card key={project.slug}>
-									<Article project={project} views={views[project.slug] ?? 0} />
-								</Card>
-							))}
-					</div>
-					<div className="grid grid-cols-1 gap-4">
-						{sorted
-							.filter((_, i) => i % 3 === 2)
-							.map((project) => (
-								<Card key={project.slug}>
-									<Article project={project} views={views[project.slug] ?? 0} />
-								</Card>
-							))}
-					</div>
-				</div>
+			</div>
 			</div>
 		</div>
 	);

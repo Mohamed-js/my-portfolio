@@ -6,19 +6,19 @@ import { Analytics } from "./components/analytics";
 
 export const metadata: Metadata = {
 	title: {
-		default: "chronark.com",
+		default: "Mohamed Atef",
 		template: "%s | chronark.com",
 	},
-	description: "Software engineer at upstash.com and founder of planetfall.io",
+	description: "Software engineer at ETK-Technologies",
 	openGraph: {
-		title: "chronark.com",
+		title: "Mohamed Atef",
 		description:
-			"Software engineer at upstash.com and founder of planetfall.io",
+			"Software engineer at ETK-Technologies",
 		url: "https://chronark.com",
-		siteName: "chronark.com",
+		siteName: "Mohamed Atef",
 		images: [
 			{
-				url: "https://chronark.com/og.png",
+				url: "/atef.jpg",
 				width: 1920,
 				height: 1080,
 			},
@@ -37,12 +37,9 @@ export const metadata: Metadata = {
 			"max-snippet": -1,
 		},
 	},
-	twitter: {
-		title: "Chronark",
-		card: "summary_large_image",
-	},
+	
 	icons: {
-		shortcut: "/favicon.png",
+		shortcut: "/atef.jpg",
 	},
 };
 const inter = Inter({
