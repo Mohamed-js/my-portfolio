@@ -54,7 +54,8 @@ export const Navigation: React.FC = () => {
 								
 									el.classList.add("fade-right")
 								});
-							document.querySelectorAll(".card").forEach((el)=> {el.style.border = "none"});
+							Array.from(document.querySelectorAll('.card') as NodeListOf<HTMLElement>).forEach((el)=> {el.style.border = "none"})
+							
 							setTimeout(()=>{
 								router.push("/");
 							}, 900)
