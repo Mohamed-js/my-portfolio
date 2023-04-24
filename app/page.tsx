@@ -65,21 +65,37 @@ export default function Home() {
 					<h1 className="fades-right z-10 text-3xl text-transparent duration-1000 cursor-default text-edge-outline animate-title font-display sm:text-5xl md:text-7xl lg:text-8xl whitespace-nowrap bg-clip-text bg-white mt-2">
 						MOHAMED ATEF
 					</h1>
-					<h2 className="fades-right text-sm text-zinc-500 md:ml-1 whitespace-wrap animate-fade-in">
-						Hi, my name is Mohamed, and I build web and mobile solutions...
+					<h2 className="fades-right text-base text-zinc-500 md:ml-1 whitespace-wrap animate-fade-in tracking-wide">
+						Hi, my name is Mohamed, and I'm a <span className="bg-white p-1 pt-2 mx-1 text-lg text-black">FULL-STACK</span> developer.
 						<br />
-						<button className="text-sky-400 text-sm md:text-lg bg-blue outline outline-1  outline-sky-400 rounded-xl p-3 px-8 mt-5"
-						onClick={(e)=>{
-							document.querySelectorAll(".fades-left").forEach((el)=> {el.classList.add("fade-left")});
-							document.querySelectorAll(".fades-right").forEach((el)=> {el.classList.add("fade-right")});
-							
-							Array.from(document.querySelectorAll('.card') as NodeListOf<HTMLElement>).forEach((el)=> {el.style.border = "none"})
+						<div className="flex">
+							<button className="bg-sky-400 text-white text-sm md:text-lg bg-blue rounded-xl p-3 px-8 mt-5 tracking-wider"
+							onClick={(e)=>{
+								document.querySelectorAll(".fades-left").forEach((el)=> {el.classList.add("fade-left")});
+								document.querySelectorAll(".fades-right").forEach((el)=> {el.classList.add("fade-right")});
+								
+								Array.from(document.querySelectorAll('.card') as NodeListOf<HTMLElement>).forEach((el)=> {el.style.border = "none"})
 
-							setTimeout(()=>{
-								router.push("/projects");
-							}, 900)
+								setTimeout(()=>{
+									router.push("/projects");
+								}, 900)
+								
+							}}>My Projects</button>
+							{/* <button className="text-sky-400 outline outline-1 outline-sky-400a text-sm md:text-lg bg-blue rounded-xl p-3 px-8 mt-5 tracking-wider ml-2 font-thin"
+							onClick={(e)=>{
+								document.querySelectorAll(".fades-left").forEach((el)=> {el.classList.add("fade-left")});
+								document.querySelectorAll(".fades-right").forEach((el)=> {el.classList.add("fade-right")});
+								
+								Array.from(document.querySelectorAll('.card') as NodeListOf<HTMLElement>).forEach((el)=> {el.style.border = "none"})
+
+								setTimeout(()=>{
+									router.push("/skills");
+								}, 900)
+								
+							}}>Skills</button> */}
 							
-						}}>My Projects</button>
+						</div>
+						
 					</h2>
 				</div>
 			</div>
