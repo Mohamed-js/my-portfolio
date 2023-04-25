@@ -50,7 +50,7 @@ export default function Home() {
 			"frequency_penalty": 0,
 			"presence_penalty": 0
 		  }
-	
+
 		  const requestOptions = {
 			method: 'POST',
 			headers: {
@@ -87,19 +87,6 @@ export default function Home() {
 	return (
 		<div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden p-3">
 			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 w-full h-full fixed"></div>
-			{/* <nav className="my-12 lg:my-16 animate-fade-in">
-				<ul className="flex items-center justify-center gap-4">
-					{navigation.map((item) => (
-						<Link
-							key={item.href}
-							href={item.href}
-							className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-						>
-							{item.name}
-						</Link>
-					))}
-				</ul>
-			</nav> */}
 			<div className="flex justify-center">
 				<div className="fades-right md:hidden w-36 h-36 rounded-full relative overflow-hidden mb-8 animate-fade-in animate-image shadow-[0_0_8px_7px_rgb(0,145,255)]">
 					<Image src="/atef.jpg" alt="me"  className="grayscale object-cover object-top scale-x-[-1]" fill />
@@ -134,7 +121,7 @@ export default function Home() {
 								handleOpen();
 							}}>Ask GPT</button>
 							{open && <div className="dialog-container flex fixed w-full h-full bg-gray-800 bg-opacity-50 items-center justify-center top-0 left-0">
-								<div className="dialog bg-white p-4 rounded-2xl w-1/2 max-w-xl relative">
+								<div className="dialog bg-white p-4 rounded-2xl w-full max-w-xl relative m-3">
 									<button className="close absolute top-0 right-0 text-gray-500 m-4 border px-2 rounded"
 									onClick={()=>{
 										setAnswer(undefined);
@@ -142,8 +129,8 @@ export default function Home() {
 										setPrompt('');
 									}}
 									>×</button>
-									<h2 className="text-center text-black mb-3 text-3xl">GPT CHAT</h2>
-									<h3 className=" text-gray-900 font-sans">A chance to talk to GPT while you are here...</h3>
+									<h2 className="text-center text-black mb-3 text-3xl">ASK GPT</h2>
+									<h3 className=" text-gray-900 font-sans">A chance to ask to GPT while you are here...</h3>
 									
 									{answer? <div className="answer bg-black text-white font-thin font-mono p-3 rounded-lg mt-3"><div className=" text-green-600 mb-2">Q: {prompt}</div> A: {answer}</div>: <textarea onChange={(e)=> setPrompt(e.target.value)} className="border border-1 border-gray-300 selection:border-grey-400 w-full p-2 mt-2 rounded" placeholder="How are you doing GPT?" rows={4} aria-expanded={false} autoFocus autoCorrect="false"></textarea>}
 									{!answer && <button onClick={async ()=>{
