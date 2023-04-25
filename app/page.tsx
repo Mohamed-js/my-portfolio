@@ -102,7 +102,7 @@ export default function Home() {
 						MOHAMED ATEF
 					</h1>
 					<h2 className="fades-right text-base text-zinc-500 md:ml-1 whitespace-wrap animate-fade-in tracking-wide">
-						Hi, my name is Mohamed, and I'm a <span className="bg-white p-1 pt-2 mx-1 text-lg text-black">FULL-STACK</span> developer.
+						Hi, my name is Mohamed, and I'm a <span className="bg-white p-1 pt-2 mx-1 text-lg text-black whitespace-nowrap">FULL-STACK</span> developer.
 						<br />
 						<div className="flex">
 							<button className="bg-sky-400 text-white text-sm md:text-lg bg-blue rounded-xl p-3 px-8 mt-5 tracking-wider"
