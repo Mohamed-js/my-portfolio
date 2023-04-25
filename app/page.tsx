@@ -7,23 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Configuration, OpenAIApi } from 'openai';
 
-const configuration = new Configuration({
-	apiKey: process.env.OPEN_API,
-  });
-const openai = new OpenAIApi(configuration);
-const getResponse = async (prompt: string) => {
-	const response = await openai.createCompletion({
-	model: "text-davinci-003",
-	prompt: `I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"I will not answer that :'(\".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: I will not answer that :'(\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: I will not answer that :'(\n\nQ: ${prompt}?\nA:`,
-	  temperature: 0,
-	  max_tokens: 100,
-	  top_p: 1,
-	  frequency_penalty: 0.0,
-	  presence_penalty: 0.0,
-	  stop: ["\n"],
-	});
-	return response;
-  }
+
 
 const socials = [
 	{
@@ -53,8 +37,53 @@ export default function Home() {
 	const [open, setOpen] = useState(false);
 	const [prompt, setPrompt] = useState('');
 	const handleOpen = () => setOpen(!open);
-	const router = useRouter()
+	const router = useRouter();
 
+	async function getAi(){
+		const DEFAULT_PARAMS = {
+			"prompt": `I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"I will not answer that :'(\".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: I will not answer that :'(\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: I will not answer that :'(\n\nQ: ${prompt}?\nA:`,
+			"model": "text-davinci-003",
+			"temperature": 0,
+			"max_tokens": 100,
+			"top_p": 1,
+			"stop": ["\n"],
+			"frequency_penalty": 0,
+			"presence_penalty": 0
+		  }
+	
+		  const requestOptions = {
+			method: 'POST',
+			headers: {
+			  'Content-Type': 'application/json',
+			  'Authorization': `Bearer ${process.env.OPEN_API}`
+			},
+			body: JSON.stringify(DEFAULT_PARAMS)
+		  };
+
+		const response = await fetch('https://api.openai.com/v1/completions', requestOptions);
+		const data = await response.json();
+		  
+		return data.choices[0].text;
+	}
+
+	// const configuration = new Configuration({
+	// 	apiKey: process.env.OPEN_API,
+	//   });
+	// const openai = new OpenAIApi(configuration);
+	// const getResponse = async (prompt: string) => {
+	// 	const response = await openai.createCompletion({
+	// 	model: "text-davinci-003",
+	// 	prompt: `I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"I will not answer that :'(\".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: I will not answer that :'(\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: I will not answer that :'(\n\nQ: ${prompt}?\nA:`,
+	// 	  temperature: 0,
+	// 	  max_tokens: 100,
+	// 	  top_p: 1,
+	// 	  frequency_penalty: 0.0,
+	// 	  presence_penalty: 0.0,
+	// 	  stop: ["\n"],
+	// 	});
+	// 	return response;
+	//   }
+	
 	return (
 		<div className="flex flex-col items-center justify-center w-screen h-screen overflow-hidden p-3">
 			<div className="bg-gradient-to-tl from-zinc-900/0 via-zinc-900 to-zinc-900/0 w-full h-full fixed"></div>
@@ -114,13 +143,13 @@ export default function Home() {
 									}}
 									>×</button>
 									<h2 className="text-center text-black mb-3 text-3xl">GPT CHAT</h2>
-									<h3 className=" text-gray-900 font-sans font-thin">A chance to talk to GPT while you are here...</h3>
+									<h3 className=" text-gray-900 font-sans">A chance to talk to GPT while you are here...</h3>
 									
-									{answer? <div className="answer bg-black text-white font-thin font-mono p-3 rounded-lg mt-3"><div className=" text-green-600 mb-2">Q: {prompt}?</div> A: {answer}</div>: <textarea onChange={(e)=> setPrompt(e.target.value)} className="border border-1 border-gray-300 selection:border-grey-400 w-full p-2 mt-2 rounded" placeholder="How are you doing GPT?" rows={4} aria-expanded={false} autoFocus autoCorrect="false"></textarea>}
+									{answer? <div className="answer bg-black text-white font-thin font-mono p-3 rounded-lg mt-3"><div className=" text-green-600 mb-2">Q: {prompt}</div> A: {answer}</div>: <textarea onChange={(e)=> setPrompt(e.target.value)} className="border border-1 border-gray-300 selection:border-grey-400 w-full p-2 mt-2 rounded" placeholder="How are you doing GPT?" rows={4} aria-expanded={false} autoFocus autoCorrect="false"></textarea>}
 									{!answer && <button onClick={async ()=>{
 										setAsking(true)
-										await getResponse(prompt).then(res => {
-											const ans = res.data.choices[0].text?.trim()
+										await getAi().then(ans => {
+											
 											for (let i = 0; i < ans.length; i++) {
 												setTimeout(()=>{
 													setAnswer(prev => {
@@ -130,7 +159,7 @@ export default function Home() {
 															return ans[i]
 														}
 													})
-												}, (i*20) + 200)
+												}, (i*30) + 200)
 											}
 										});
 										setAsking(false)
