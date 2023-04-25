@@ -55,7 +55,7 @@ export default function Home() {
 			method: 'POST',
 			headers: {
 			  'Content-Type': 'application/json',
-			  'Authorization': `Bearer ${process.env.OPEN_API}`
+			  'Authorization': `Bearer ${process.env.NEXT_PUBLIC_OPEN_API}`
 			},
 			body: JSON.stringify(DEFAULT_PARAMS)
 		  };
