@@ -130,7 +130,7 @@ export default function Home() {
 									}}
 									>×</button>
 									<h2 className="text-center text-black mb-3 text-3xl">ASK GPT</h2>
-									<h3 className=" text-gray-900 font-sans">A chance to ask to GPT while you are here...</h3>
+									<h3 className=" text-gray-900 font-sans">A chance to ask GPT while you are here...</h3>
 									
 									{answer? <div className="answer bg-black text-white font-thin font-mono p-3 rounded-lg mt-3"><div className=" text-green-600 mb-2">Q: {prompt}</div> A: {answer}</div>: <textarea onChange={(e)=> setPrompt(e.target.value)} className="border border-1 border-gray-300 selection:border-grey-400 w-full p-2 mt-2 rounded" placeholder="How are you doing GPT?" rows={4} aria-expanded={false} autoFocus autoCorrect="false"></textarea>}
 									{!answer && <button onClick={async ()=>{
