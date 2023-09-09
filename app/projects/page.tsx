@@ -26,16 +26,14 @@ const socials = [
     description: null,
   },
   {
-    image: "/sellex-storefront.png",
-    link: "https://sellex-store.vercel.app/otaku",
-    label: "Sellex Storefront",
-    github: "https://github.com/Mohamed-js/sellex-store-front",
+    image: "/smoothysense.png",
+    link: "https://smoothysense.vercel.app/",
+    label: "SmoothySense Store",
     notScrolling: false,
     credentials: null,
-    stack: ["Next.js", "Tailwind"],
+    stack: ["Next.js", "Node.js", "Tailwind", "Sequelize"],
     description: null,
   },
-
   {
     image: "/andal.png",
     link: "https://lucid-joliot-e8cdf9.netlify.app/",
